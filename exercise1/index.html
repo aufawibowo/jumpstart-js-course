@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greeting App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome!</h2>
+        <input type="text" id="nameInput" placeholder="Enter your name">
+        <button onclick="greetUser()">Greet Me</button>
+        <div id="greeting"></div>
+    </div>
+    <div id="toast" class="toast"></div>
+
+    <script>
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.innerHTML = message;
+            toast.className = 'show';
+            setTimeout(() => { toast.className = toast.className.replace('show', ''); }, 3000);
+        }
+
+        function getTimeBasedGreeting() {
+            const hour = new Date().getHours();
+            if (hour < 12) {
+                return 'Good morning';
+            } else if (hour < 18) {
+                return 'Good afternoon';
+            } else {
+                return 'Good evening';
+            }
+        }
+
+        function greetUser() {
+            const name = document.getElementById('nameInput').value;
+            if (!name) {
+                showToast('Name cannot be empty!');
+                return;
+            }
+            const timeBasedGreeting = getTimeBasedGreeting();
+            const greetingMessage = `${timeBasedGreeting}, ${name}! Welcome!`;
+            document.getElementById('greeting').innerHTML = greetingMessage;
+        }
+    </script>
+</body>
+</html>
